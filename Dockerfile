@@ -18,7 +18,7 @@ RUN apk add --update --no-cache \
 
 RUN mkdir -p /etc/bash_completion.d
 RUN cd /etc/bash_completion.d/ \
-  && curl -SLO https://rawgit.com/django/django/stable/1.11.x/extras/django_bash_completion
+  && curl -SLO https://rawgit.com/django/django/stable/2.0.5.x/extras/django_bash_completion
 
 WORKDIR /root/src/djangogirls
 COPY requirements.txt requirements.txt
