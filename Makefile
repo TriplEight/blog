@@ -2,7 +2,7 @@
 
 include Makefiles/*.mk
 
-# Generates a help message. Borrowed from https://github.com/pydanny/cookiecutter-djangopackage.
+# Generates a help message.
 help: ## Display this help message
 	@echo "Please use \`make <target>' where <target> is one of the following:"
 	@perl -nle'print $& if m{^[\.a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m  %-25s\033[0m %s\n", $$1, $$2}'
@@ -13,11 +13,11 @@ runserver: ## Start Django development server
 	docker-compose up
 
 cli: ## Start development command line interface
-	docker-compose run --rm app bin/cli-command.sh
+	docker-compose run --rm web bin/cli-command.sh
 
 build: # Build image
 	docker pull python:3.6-alpine
-	docker build -t gsong/djangogirls-app .
+	docker-compose build .
 
 pull: # Pull latest image from Docker Hub
 	docker-compose pull

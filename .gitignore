@@ -5,5 +5,5 @@
 .env
 /static
 __pycache__
-db.sqlite3
 myvenv
+/.idea

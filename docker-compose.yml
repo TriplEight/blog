@@ -1,16 +1,19 @@
 version: '3.3'
 
 services:
-  app:
-    image: gsong/djangogirls-app
-    container_name: djangogirls-app
-    hostname: app
-    env_file: .env
+  web:
+    build: .
+    hostname: web
     command: ./manage.py runserver 0.0.0.0:${APP_PORT:-8000}
     volumes:
       - ${HOME}/Desktop:/root/Desktop:ro
-      - ./.data/services/app/bash_history:/root/.bash_history
-      - ./.data/services/app/ipython/:/root/.ipython
-      - .:/root/src/djangogirls
+      - .:/code
+      - ./.data/services/web/bash_history:/root/.bash_history
+      - ./.data/services/web/ipython/:/root/.ipython
+    depends_on:
+      - db
     ports:
       - "${APP_PORT:-8000}:${APP_PORT:-8000}"
+
+  db:
+    image: postgres
